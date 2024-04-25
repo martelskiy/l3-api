@@ -1,0 +1,14 @@
+name: "Workflow for Feature branches"
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  go-build-test-lint:
+    uses: martelskiy/workflows/.github/workflows/go.yml@main
+    secrets:
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    with:
+      go-version: "1.22.x"
