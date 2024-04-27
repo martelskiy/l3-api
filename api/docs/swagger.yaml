@@ -1,8 +1,68 @@
+definitions:
+  response.BadRequestProblemDetails:
+    properties:
+      details:
+        type: string
+      errors:
+        items:
+          $ref: '#/definitions/response.ProblemDetailsError'
+        type: array
+      status:
+        type: integer
+      title:
+        type: string
+      type:
+        type: string
+    type: object
+  response.InternalServerErrorProblemDetails:
+    properties:
+      details:
+        type: string
+      status:
+        type: integer
+      title:
+        type: string
+      type:
+        type: string
+    type: object
+  response.ProblemDetailsError:
+    properties:
+      detail:
+        type: string
+      title:
+        type: string
+    type: object
 info:
   contact: {}
   title: L3 API
   version: "1.0"
 paths:
+  /api/stakes/{wallet}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: wallet address
+        in: path
+        name: wallet
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.BadRequestProblemDetails'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.InternalServerErrorProblemDetails'
+      summary: Get stakes
+      tags:
+      - stake
   /status:
     get:
       consumes:
