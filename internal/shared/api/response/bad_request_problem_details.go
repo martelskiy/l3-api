@@ -1,4 +1,4 @@
-package api_response
+package response
 
 type BadRequestProblemDetails struct {
 	*ProblemDetails
