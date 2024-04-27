@@ -3,14 +3,16 @@ package route
 import "net/http"
 
 type Route struct {
-	name    string
-	handler func(responseWriter http.ResponseWriter, request *http.Request)
+	name     string
+	httpVerb string
+	handler  func(responseWriter http.ResponseWriter, request *http.Request)
 }
 
-func NewRoute(name string, handler func(responseWriter http.ResponseWriter, request *http.Request)) Route {
+func NewRoute(name, httpVerb string, handler func(responseWriter http.ResponseWriter, request *http.Request)) Route {
 	return Route{
-		name:    name,
-		handler: handler,
+		name:     name,
+		handler:  handler,
+		httpVerb: httpVerb,
 	}
 }
 
