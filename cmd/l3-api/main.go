@@ -11,6 +11,7 @@ import (
 	"github.com/martelskiy/l3-api/internal/shared/lifecycle"
 	"github.com/martelskiy/l3-api/internal/shared/logger"
 	"github.com/martelskiy/l3-api/internal/shared/parser/json"
+	"github.com/martelskiy/l3-api/internal/stake"
 )
 
 const appConfigPath = "config/appconfig.json"
@@ -27,10 +28,12 @@ func main() {
 	if err != nil {
 		lifecycle.StopApplication("error initialization application configurations")
 	}
+	config.Configuration = configuration
 	router := route.NewRouter()
 	router.
 		WithAPIDocumentation().
-		WithRoute(route.NewRoute("/status", healthcheck.GetStatus))
+		WithRoute(route.NewRoute("/status", "GET", healthcheck.GetStatus)).
+		WithRoute(route.NewRoute("/api/stakes/{wallet}", "GET", stake.GetStakesHandler))
 
 	host := host.New(configuration.Api.Port, router)
 	err = host.RunAsync()
