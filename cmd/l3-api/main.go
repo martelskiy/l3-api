@@ -32,6 +32,7 @@ func main() {
 	router := route.NewRouter()
 	router.
 		WithAPIDocumentation().
+		WithCORSMiddleware().
 		WithRoute(route.NewRoute("/status", "GET", healthcheck.GetStatus)).
 		WithRoute(route.NewRoute("/api/stakes/{wallet}", "GET", stake.GetStakesHandler))
 
