@@ -3,5 +3,5 @@
     "port": "8080"
   },
   "stake_contract_addr": "0x83B5bE643cA212819895fE854d35ff9f6A9AA5B0",
-  "rpc_url": "https://eth-sepolia.g.alchemy.com/v2/REPLACE_WITH_API_KEY"
+  "rpc_url": "https://base-mainnet.g.alchemy.com/v2/REPLACE_WITH_API_KEY"
 }
