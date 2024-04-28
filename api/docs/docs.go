@@ -39,7 +39,10 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/stake.getStakeResponse"
+                        }
                     },
                     "400": {
                         "description": "Bad Request",
@@ -125,6 +128,17 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string"
+                }
+            }
+        },
+        "stake.getStakeResponse": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "startTime": {
+                    "type": "integer"
                 }
             }
         }

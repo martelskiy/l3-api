@@ -14,6 +14,11 @@ import (
 
 var log = logger.Get()
 
+type getStakeResponse struct {
+	Amount    int64
+	StartTime int64
+}
+
 // @Summary      Get stakes
 // @Tags  		 stake
 // @Accept       json
@@ -21,7 +26,7 @@ var log = logger.Get()
 // @Param        wallet path string true "wallet address"
 // @Failure      400 {object} response.BadRequestProblemDetails
 // @Failure      500 {object} response.InternalServerErrorProblemDetails
-// @Success      200 
+// @Success      200 {object} getStakeResponse
 // @Router       /api/stakes/{wallet} [get]
 func GetStakesHandler(responseWriter http.ResponseWriter, request *http.Request) {
 	vars := mux.Vars(request)
@@ -83,6 +88,6 @@ func GetStakesHandler(responseWriter http.ResponseWriter, request *http.Request)
 	log.Infof("stakes were fetched. Amount: '%v', StartTime: '%v'", stakes.Amount, stakes.StartTime)
 
 	responseWriter.WriteHeader(http.StatusOK)
-	statusResponse, _ := json.Marshal(stakes.Amount)
+	statusResponse, _ := json.Marshal(getStakeResponse{Amount: stakes.Amount.Int64(), StartTime: stakes.StartTime.Int64()})
 	_, _ = responseWriter.Write([]byte(statusResponse))
 }

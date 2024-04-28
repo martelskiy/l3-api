@@ -32,6 +32,13 @@ definitions:
       title:
         type: string
     type: object
+  stake.getStakeResponse:
+    properties:
+      amount:
+        type: integer
+      startTime:
+        type: integer
+    type: object
 info:
   contact: {}
   title: L3 API
@@ -51,7 +58,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: ""
+          description: OK
+          schema:
+            $ref: '#/definitions/stake.getStakeResponse'
         "400":
           description: Bad Request
           schema:
